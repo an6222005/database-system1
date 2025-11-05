@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Management System (MongoDB)</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #c3e0e5, #a1c4fd);
+      color: #333;
+    }
+
+    header {
+      text-align: center;
+      background-color: #2f3640;
+      color: white;
+      padding: 25px 0;
+      font-size: 28px;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .container {
+      max-width: 900px;
+      background: #ffffff;
+      margin: 40px auto;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      border-left: 5px solid #4CAF50;
+      padding-left: 10px;
+      color: #444;
+    }
+
+    form {
+      margin-bottom: 30px;
+    }
+
+    input, button {
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #4CAF50;
+      box-shadow: 0 0 5px rgba(76,175,80,0.4);
+    }
+
+    button, input[type=submit] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+
+    button:hover, input[type=submit]:hover {
+      background-color: #45a049;
+      transform: translateY(-1px);
+    }
+
+    .delete-btn {
+      background-color: #e74c3c;
+    }
+
+    .delete-btn:hover {
+      background-color: #c0392b;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 0;
+    }
+
+    td {
+      text-align: center;
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    tr:hover {
+      background-color: #f9f9f9;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #666;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <header>MongoDB Student Management System</header>
+
+  <div class="container">
+    <h2>Insert Predefined Students</h2>
+    <form action="/insert_many" method="POST">
+      <button type="submit">Insert 3 Sample Students</button>
+    </form>
+
+    <h2>Add New Student</h2>
+    <form action="/add_student" method="POST">
+      <label>Name:</label>
+      <input type="text" name="name" required>
+      <label>Age:</label>
+      <input type="number" name="age" required>
+      <label>Email:</label>
+      <input type="email" name="email" required>
+      <input type="submit" value="Add Student">
+    </form>
+
+    <h2>Current Students</h2>
+    <table>
+      <tr>
+        <th>Name</th><th>Age</th><th>Email</th><th>Actions</th>
+      </tr>
+      {% for s in students %}
+      <tr>
+        <td>{{ s.name }}</td>
+        <td>{{ s.age }}</td>
+        <td>{{ s.email }}</td>
+        <td class="actions">
+          <form action="/delete/{{ s.email }}" method="POST" style="display:inline;">
+            <input type="submit" class="delete-btn" value="Delete">
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <footer>
+    © 2025 Student Database System | Powered by Flask & MongoDB
+  </footer>
+</body>
+</html>
