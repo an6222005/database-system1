@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 # Connect to MongoDB Atlas
-MONGO_URI = "mongodb+srv://<username>:<password>@cluster0.n2o4iqb.mongodb.net/?retryWrites=true&w=majority=true"
+MONGO_URI = "mongodb+srv://<username>:<password>@cluster0.n2o4iqb.mongodb.net/?retryWrites=true&w=majority&tls=true"
 client = MongoClient(MONGO_URI)
 db = client['student_db']
 collection = db['students']
