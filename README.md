@@ -10,6 +10,6 @@ Youtube Link:https://youtu.be/xnw7F0kpSWQ
 
 HW3:
 
-Youtube Link:
+Youtube Link:https://youtu.be/sTcTHxhMOFA
 
 Render Link:https://database-system1.onrender.com
