@@ -1,34 +1,33 @@
 from flask import Flask, render_template, request, redirect
 from pymongo import MongoClient
+from bson.objectid import ObjectId
 import os
 
 app = Flask(__name__)
 
-# Connect to MongoDB Atlas
-MONGO_URI = "mongodb+srv://linchenan:A131984247@cluster0.n2o4iqb.mongodb.net/?appName=Cluster0"
+# MongoDB 連線設定
+MONGO_URI = os.getenv("MONGO_URI", "mongodb+srv://linchenan:A131984247@cluster0.n2o4iqb.mongodb.net/?appName=Cluster0")
 client = MongoClient(MONGO_URI)
-db = client['student_db']
-collection = db['students']
+db = client.student_db
+collection = db.students  # collection 名稱
 
-# Home page - show students
-@app.route('/')
+# 首頁顯示所有學生
+@app.route("/")
 def index():
     students = list(collection.find())
     return render_template("index.html", students=students)
 
-# Insert a single student
-@app.route('/insert', methods=['POST'])
+# 新增單筆學生
+@app.route("/insert", methods=["POST"])
 def insert():
-    student = {
-        'name': request.form['name'],
-        'age': int(request.form['age']),
-        'email': request.form['email']
-    }
-    collection.insert_one(student)
-    return redirect('/')
+    name = request.form.get("name")
+    age = int(request.form.get("age"))
+    email = request.form.get("email")
+    collection.insert_one({"name": name, "age": age, "email": email})
+    return redirect("/")
 
-# Insert many predefined students
-@app.route('/insert_many')
+# Insert Many 預設學生
+@app.route("/insert_many", methods=["POST"])
 def insert_many():
     predefined_students = [
         {"name": "Alice", "age": 20, "email": "alice@example.com"},
@@ -36,16 +35,22 @@ def insert_many():
         {"name": "Charlie", "age": 22, "email": "charlie@example.com"}
     ]
     collection.insert_many(predefined_students)
-    return redirect('/')
+    return redirect("/")
 
-# Delete a student by ID
-@app.route('/delete/<student_id>')
-def delete(student_id):
-    from bson.objectid import ObjectId
-    collection.delete_one({"_id": ObjectId(student_id)})
-    return redirect('/')
+# 修改學生
+@app.route("/update/<id>", methods=["POST"])
+def update(id):
+    name = request.form.get("name")
+    age = int(request.form.get("age"))
+    email = request.form.get("email")
+    collection.update_one({"_id": ObjectId(id)}, {"$set": {"name": name, "age": age, "email": email}})
+    return redirect("/")
 
-if __name__ == '__main__':
-    # Bind to Render port
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port)
+# 刪除學生
+@app.route("/delete/<id>")
+def delete(id):
+    collection.delete_one({"_id": ObjectId(id)})
+    return redirect("/")
+
+if __name__ == "__main__":
+    app.run(debug=True)

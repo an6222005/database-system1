@@ -1,0 +1,16 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+  border-radius: 20px;
+}
+
+input, button {
+  border-radius: 10px !important;
+}
+
+table {
+  border-radius: 10px;
+  overflow: hidden;
+}
