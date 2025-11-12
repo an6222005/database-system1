@@ -13,3 +13,7 @@ HW3:
 Youtube Link:https://youtu.be/sTcTHxhMOFA
 
 Render Link:https://database-system1.onrender.com
+
+Final Proposal:
+
+Youtube Link:https://youtu.be/kvHz-bNH-Es
