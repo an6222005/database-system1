@@ -22,10 +22,10 @@ Final Proposal:
 
 Youtube Link: https://youtu.be/kvHz-bNH-Es
 
-Final Project: https://youtu.be/s3ALYOvnt2c
+Final Project: 
 
 Code(I put it in another github link): https://github.com/an6222005/AI_Employee_Feedback
 
-Youtube Link: 
+Youtube Link: https://youtu.be/s3ALYOvnt2c
 
 Render Link: 
