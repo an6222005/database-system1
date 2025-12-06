@@ -21,3 +21,7 @@ Youtube Link:https://youtu.be/o8ualwEC7lY
 Final Proposal:
 
 Youtube Link:https://youtu.be/kvHz-bNH-Es
+
+Final Project:
+
+code(another github link):https://github.com/an6222005/AI_Employee_Feedback
